@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Mother's Restaurant | Homestyle Comfort Food Since 1974</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fef7ee',
+              100: '#fdedd3',
+              200: '#fad7a5',
+              300: '#f6b96b',
+              400: '#f19333',
+              500: '#ee7a12',
+              600: '#df6008',
+              700: '#b94808',
+              800: '#93390f',
+              900: '#773110',
+              950: '#411605',
+            },
+            warm: {
+              50: '#faf6f1',
+              100: '#f3ebe0',
+              200: '#e6d5be',
+              300: '#d5b88e',
+              400: '#c49a5e',
+              500: '#b7843f',
+              600: '#ab7336',
+              700: '#8d5d2e',
+              800: '#714b2d',
+              900: '#5b3e28',
+              950: '#321f13',
+            }
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(65, 22, 5, 0.85) 0%, rgba(65, 22, 5, 0.5) 50%, rgba(65, 22, 5, 0.3) 100%);
+    }
+    
+    .review-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    
+    .menu-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-anim { animation: float 3s ease-in-out infinite; }
+
+    .marquee-track {
+      display: flex;
+      animation: marquee 40s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ee7a12;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .cta-pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(238, 122, 18, 0.4); }
+      50% { box-shadow: 0 0 0 12px rgba(238, 122, 18, 0); }
+    }
+
+    .star-rating { color: #f19333; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #faf6f1; }
+    ::-webkit-scrollbar-thumb { background: #c49a5e; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #b7843f; }
+  </style>
+</head>
+<body class="bg-warm-50 text-warm-950 overflow-x-hidden">
+
+  <!-- Navigation -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="#home" class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center">
+            <i data-lucide="utensils" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <span class="font-display text-xl font-bold text-white nav-text-color transition-colors duration-300">My Mother's</span>
+            <span class="block text-xs text-warm-200 nav-subtext-color transition-colors duration-300 tracking-wider uppercase">Since 1974</span>
+          </div>
+        </a>
+        
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#about" class="nav-link text-sm font-medium text-white nav-link-text transition-colors duration-300">Our Story</a>
+          <a href="#menu" class="nav-link text-sm font-medium text-white nav-link-text transition-colors duration-300">Menu</a>
+          <a href="#reviews" class="nav-link text-sm font-medium text-white nav-link-text transition-colors duration-300">Reviews</a>
+          <a href="#features" class="nav-link text-sm font-medium text-white nav-link-text transition-colors duration-300">Why Us</a>
+          <a href="#contact" class="nav-link text-sm font-medium text-white nav-link-text transition-colors duration-300">Visit</a>
+        </div>
+
+        <div class="hidden md:flex items-center gap-4">
+          <a href="tel:+16022785280" class="flex items-center gap-2 text-white nav-link-text transition-colors duration-300 text-sm font-medium">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            (602) 278-5280
+          </a>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden text-white">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-warm-950/95 backdrop-blur-lg border-t border-warm-800">
+      <div class="px-4 py-6 space-y-4">
+        <a href="#about" class="block text-warm-200 hover:text-brand-400 font-medium mobile-nav-link">Our Story</a>
+        <a href="#menu" class="block text-warm-200 hover:text-brand-400 font-medium mobile-nav-link">Menu</a>
+        <a href="#reviews" class="block text-warm-200 hover:text-brand-400 font-medium mobile-nav-link">Reviews</a>
+        <a href="#features" class="block text-warm-200 hover:text-brand-400 font-medium mobile-nav-link">Why Us</a>
+        <a href="#contact" class="block text-warm-200 hover:text-brand-400 font-medium mobile-nav-link">Visit</a>
+        <div class="pt-4 border-t border-warm-800 space-y-3">
+          <a href="tel:+16022785280" class="flex items-center gap-2 text-brand-400 font-semibold">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            (602) 278-5280
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative min-h-screen flex items-center">
+    <div class="absolute inset-0">
+      <img src="http://static.photos/food/1200x630/77" alt="Comfort food" class="w-full h-full object-cover">
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-brand-500/20 backdrop-blur-sm border border-brand-400/30 rounded-full px-4 py-2 mb-6" style="animation: fadeInUp 0.6s ease forwards;">
+          <span class="flex items-center star-rating text-sm">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </span>
+          <span class="text-brand-200 text-sm font-medium">4.6 ★ from 2,053+ reviews</span>
+        </div>
+        
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6" style="animation: fadeInUp 0.8s ease forwards;">
+          Home-Cooked Meals,<br>
+          <span class="text-brand-400">Just Like Mom Made.</span>
+        </h1>
+        
+        <p class="text-lg sm:text-xl text-warm-200 mb-10 max-w-2xl leading-relaxed" style="animation: fadeInUp 1s ease forwards;">
+          Phoenix's beloved comfort food destination since 1974. Slow-roasted prime rib, tender pot roast, homemade bread with honey butter, and pies made from scratch — all served with generous portions and a warm smile.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4" style="animation: fadeInUp 1.2s ease forwards;">
+          <a href="#menu" class="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+            View Menu
+          </a>
+        </div>
+
+        <div class="mt-14 flex flex-wrap gap-8 text-warm-300 text-sm" style="animation: fadeInUp 1.4s ease forwards;">
+          <div class="flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-brand-400"></i>
+            <span>Fast Service</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="salad" class="w-4 h-4 text-brand-400"></i>
+            <span>Fresh Salad Bar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 float-anim">
+      <a href="#about" class="flex flex-col items-center gap-2 text-warm-300 hover:text-brand-400 transition-colors">
+        <span class="text-xs uppercase tracking-widest">Discover</span>
+        <i data-lucide="chevron-down" class="w-5 h-5"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="bg-warm-950 py-6 overflow-hidden">
+    <div class="marquee-track">
+      <div class="flex items-center gap-12 px-6 whitespace-nowrap">
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-brand-400"></i> Since 1974</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-brand-400 fill-current"></i> 4.6 Stars — 2,053 Reviews</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="users" class="w-4 h-4 text-brand-400"></i> Family Friendly</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-brand-400"></i> Phoenix Favorite</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="cake" class="w-4 h-4 text-brand-400"></i> Homemade Pies</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="beef" class="w-4 h-4 text-brand-400"></i> Slow-Roasted Meats</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="wheat" class="w-4 h-4 text-brand-400"></i> Fresh Baked Bread</span>
+        <span class="text-warm-600">•</span>
+      </div>
+      <div class="flex items-center gap-12 px-6 whitespace-nowrap">
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-brand-400"></i> Since 1974</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="star" class="w-4 h-4 text-brand-400 fill-current"></i> 4.6 Stars — 2,053 Reviews</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="users" class="w-4 h-4 text-brand-400"></i> Family Friendly</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="heart" class="w-4 h-4 text-brand-400"></i> Phoenix Favorite</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="cake" class="w-4 h-4 text-brand-400"></i> Homemade Pies</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="beef" class="w-4 h-4 text-brand-400"></i> Slow-Roasted Meats</span>
+        <span class="text-warm-600">•</span>
+        <span class="text-warm-400 font-medium flex items-center gap-2"><i data-lucide="wheat" class="w-4 h-4 text-brand-400"></i> Fresh Baked Bread</span>
+        <span class="text-warm-600">•</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 lg:py-28 bg-warm-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="fade-in">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-4">
+              <img src="http://static.photos/food/320x240/10" alt="Prime rib dinner" class="rounded-2xl shadow-lg w-full h-64 object-cover">
+              <img src="http://static.photos/restaurant/320x240/55" alt="Cozy interior" class="rounded-2xl shadow-lg w-full h-48 object-cover">
+            </div>
+            <div class="space-y-4 pt-8">
+              <img src="http://static.photos/food/320x240/33" alt="Homemade pie" class="rounded-2xl shadow-lg w-full h-48 object-cover">
+              <img src="http://static.photos/food/320x240/88" alt="Salad bar" class="rounded-2xl shadow-lg w-full h-64 object-cover">
+            </div>
+          </div>
+        </div>
+        
+        <div class="fade-in">
+          <span class="inline-block bg-brand-100 text-brand-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 tracking-wide uppercase">Our Story</span>
+          <h2 class="font-display text-4xl lg:text-5xl font-bold text-warm-950 mb-6 leading-tight">
+            A Phoenix Institution<br>
+            <span class="text-brand-500">Since 1974</span>
+          </h2>
+          <p class="text-warm-700 text-lg leading-relaxed mb-6">
+            For over 50 years, My Mother's Restaurant has been serving the kind of food that makes you feel like you're back in your grandma's kitchen. It's not about modern twists or fancy presentations — it's about honest, homestyle American cooking done right.
+          </p>
+          <p class="text-warm-700 text-lg leading-relaxed mb-8">
+            Our slow-roasted prime rib, tender pot roast that falls right off the bone, carved turkey dinner with all the sides, and our famous homemade bread with honey butter keep families coming back generation after generation.
+          </p>
+
+          <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="text-center">
+              <div class="font-display text-3xl font-bold text-brand-500">50+</div>
+              <div class="text-warm-600 text-sm mt-1">Years Serving Phoenix</div>
+            </div>
+            <div class="text-center">
+              <div class="font-display text-3xl font-bold text-brand-500">20+</div>
+              <div class="text-warm-600 text-sm mt-1">Dinner Entrées</div>
+            </div>
+            <div class="text-center">
+              <div class="font-display text-3xl font-bold text-brand-500">2,053</div>
+              <div class="text-warm-600 text-sm mt-1">5-Star Reviews</div>
+            </div>
+          </div>
+
+          <a href="#menu" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/25">
+            Explore Our Menu
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Highlights -->
+  <section id="menu" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <span class="inline-block bg-brand-100 text-brand-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 tracking-wide uppercase">Signature Dishes</span>
+        <h2 class="font-display text-4xl lg:text-5xl font-bold text-warm-950 mb-4">
+          Menu <span class="text-brand-500">Highlights</span>
+        </h2>
+        <p class="text-warm-600 text-lg max-w-2xl mx-auto">
+          Homestyle comfort food with generous portions. Every dish comes with complimentary homemade bread and honey butter.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Dish 1 -->
+        <div class="menu-card bg-warm-50 rounded-3xl overflow-hidden shadow-md fade-in group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="http://static.photos/food/640x360/12" alt="Prime Rib" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-4 left-4 bg-brand-500 text-white px-3 py-1 rounded-full text-sm font-bold">★ #1 Seller</div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-warm-950 mb-2">Slow-Roasted Prime Rib</h3>
+            <p class="text-warm-600 text-sm mb-4">Grilled to perfection, buttery and tender. Served with your choice of potato and fresh green beans.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-display text-2xl font-bold text-brand-600">Market Price</span>
+              <span class="text-xs text-warm-500 bg-warm-100 px-3 py-1 rounded-full">Includes Salad Bar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 2 -->
+        <div class="menu-card bg-warm-50 rounded-3xl overflow-hidden shadow-md fade-in group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="http://static.photos/food/640x360/45" alt="Pot Roast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-4 left-4 bg-warm-800 text-white px-3 py-1 rounded-full text-sm font-bold">Fan Favorite</div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-warm-950 mb-2">Pot Roast</h3>
+            <p class="text-warm-600 text-sm mb-4">Falls right off the bone. Tender, flavorful, and smothered in savory gravy with mashed potatoes.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-display text-2xl font-bold text-brand-600">$16.99</span>
+              <span class="text-xs text-warm-500 bg-warm-100 px-3 py-1 rounded-full">Huge Portions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 3 -->
+        <div class="menu-card bg-warm-50 rounded-3xl overflow-hidden shadow-md fade-in group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="http://static.photos/food/640x360/67" alt="Turkey Dinner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-4 left-4 bg-brand-500 text-white px-3 py-1 rounded-full text-sm font-bold">Holiday Special</div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-warm-950 mb-2">Carved Turkey Dinner</h3>
+            <p class="text-warm-600 text-sm mb-4">The best carved turkey in the Valley. Served with dressing, mashed potatoes, cranberry & gravy.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-display text-2xl font-bold text-brand-600">$17.99</span>
+              <span class="text-xs text-warm-500 bg-warm-100 px-3 py-1 rounded-full">Holiday Tradition</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 4 -->
+        <div class="menu-card bg-warm-50 rounded-3xl overflow-hidden shadow-md fade-in group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="http://static.photos/food/640x360/90" alt="Chicken Fried Steak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-warm-950 mb-2">Chicken Fried Steak</h3>
+            <p class="text-warm-600 text-sm mb-4">100% the best. Crispy, golden, smothered in out-of-this-world country gravy with real mashed potatoes.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-display text-2xl font-bold text-brand-600">$15.99</span>
+              <span class="text-xs text-warm-500 bg-warm-100 px-3 py-1 rounded-full">Comfort Classic</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 5 -->
+        <div class="menu-card bg-warm-50 rounded-3xl overflow-hidden shadow-md fade-in group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="http://static.photos/food/640x360/22" alt="Steak Sandwich" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-4 left-4 bg-warm-800 text-white px-3 py-1 rounded-full text-sm font-bold">Must Try</div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-warm-950 mb-2">Steak Sandwich</h3>
+            <p class="text-warm-600 text-sm mb-4">Tender flavorful steak with peppers, mushrooms, and perfect au jus on garlic bread. Best in the Valley.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-display text-2xl font-bold text-brand-600">$14.99</span>
+              <span class="text-xs text-warm-500 bg-warm-100 px-3 py-1 rounded-full">Lunch Special</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dish 6 -->
+        <div class="menu-card bg-warm-50 rounded-3xl overflow-hidden shadow-md fade-in group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="http://static.photos/food/640x360/55" alt="Homemade Pie" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute top-4 left-4 bg-brand-500 text-white px-3 py-1 rounded-full text-sm font-bold">Save Room!</div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl font-bold text-warm-950 mb-2">Homemade Pies</h3>
+            <p class="text-warm-600 text-sm mb-4">Made from scratch daily — apple, banana cream, peanut butter chocolate, pumpkin & more. 2.5 inches high!</p>
+            <div class="flex items-center justify-between">
+              <span class="font-display text-2xl font-bold text-brand-600">$6.99</span>
+              <span class="text-xs text-warm-500 bg-warm-100 px-3 py-1 rounded-full">Enough for 2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12 fade-in">
+        <a href="#" class="inline-flex items-center gap-2 bg-warm-950 hover:bg-warm-800 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-lg">
+          View Full Menu
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section id="order" class="relative py-20 bg-warm-950 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <img src="http://static.photos/food/1200x630/99" alt="" class="w-full h-full object-cover">
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center fade-in">
+      <span class="inline-flex items-center gap-2 bg-brand-500/20 border border-brand-400/30 rounded-full px-4 py-2 mb-6">
+        <i data-lucide="flame" class="w-4 h-4 text-brand-400"></i>
+        <span class="text-brand-400 text-sm font-semibold">Order Online for Pickup or Delivery</span>
+      </span>
+      <h2 class="font-display text-4xl lg:text-5xl font-bold text-white mb-6">
+        Craving Home-Cooked Food?<br>
+        <span class="text-brand-400">We'll Bring It to You.</span>
+      </h2>
+      <p class="text-warm-300 text-lg mb-10 max-w-2xl mx-auto">
+        Order your favorites for pickup, delivery, or catering. Hot, fresh, and ready when you are. Big portions, reasonable prices.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:+16022785280" class="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+          <i data-lucide="phone" class="w-5 h-5"></i>
+          Call to Order
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews" class="py-20 lg:py-28 bg-warm-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <span class="inline-block bg-brand-100 text-brand-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 tracking-wide uppercase">Testimonials</span>
+        <h2 class="font-display text-4xl lg:text-5xl font-bold text-warm-950 mb-4">
+          What Our <span class="text-brand-500">Guests Say</span>
+        </h2>
+        <div class="flex items-center justify-center gap-2 mt-4">
+          <div class="flex star-rating">
+            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+            <i data-lucide="star" class="w-6 h-6 fill-current"></i>
+          </div>
+          <span class="text-warm-600 text-lg font-medium">4.6 out of 5 — 2,053 reviews</span>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 fade-in">
+          <div class="flex star-rating mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-warm-700 leading-relaxed mb-4">"What a HIDDEN GEM. I seriously could have been back in my grandma's house. The complimentary homemade bread and sugar butter was so good. But the pot roast and chicken parm were the stars."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 font-bold text-sm">JK</div>
+            <div>
+              <p class="font-semibold text-warm-950 text-sm">James K.</p>
+              <p class="text-warm-500 text-xs">Regular Customer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 fade-in">
+          <div class="flex star-rating mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-warm-700 leading-relaxed mb-4">"The steak sandwich was probably the best we have eaten in a very long time. Tender flavorful steak with peppers and mushrooms and a perfect au jus. Everything is clean and no frills."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-warm-200 rounded-full flex items-center justify-center text-warm-700 font-bold text-sm">MR</div>
+            <div>
+              <p class="font-semibold text-warm-950 text-sm">Maria R.</p>
+              <p class="text-warm-500 text-xs">Local Foodie</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 fade-in">
+          <div class="flex star-rating mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-warm-700 leading-relaxed mb-4">"Best homemade countryside cooking in Phoenix! Fresh free bread to die for. Best country fried steak I've ever had with amazing mashed potatoes and gravy!!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 font-bold text-sm">DT</div>
+            <div>
+              <p class="font-semibold text-warm-950 text-sm">David T.</p>
+              <p class="text-warm-500 text-xs">8-Year Regular</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 fade-in">
+          <div class="flex star-rating mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-warm-700 leading-relaxed mb-4">"The food here is excellent home cooked food. This place was packed on a Wednesday night. If you're missing some good home cooked food I highly recommend this restaurant."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-warm-200 rounded-full flex items-center justify-center text-warm-700 font-bold text-sm">SL</div>
+            <div>
+              <p class="font-semibold text-warm-950 text-sm">Sarah L.</p>
+              <p class="text-warm-500 text-xs">Seminar Organizer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 fade-in">
+          <div class="flex star-rating mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-warm-700 leading-relaxed mb-4">"Absolutely Fantastic Food!! The prime rib was buttery and tender. My turkey plate was so flavorful and the sides were delicious! We got the Thanksgiving dinners and it was absolutely amazing."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center text-brand-700 font-bold text-sm">CP</div>
+            <div>
+              <p class="font-semibold text-warm-950 text-sm">Christine P.</p>
+              <p class="text-warm-500 text-xs">Thanksgiving Tradition</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card bg-white rounded-2xl p-6 shadow-sm border border-warm-100 fade-in">
+          <div class="flex star-rating mb-3">
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+          </div>
+          <p class="text-warm-700 leading-relaxed mb-4">"What a gem, I was a chef for 25 years — food this good takes time, quality ingredients, and soul. My wife has a sensitive stomach, the food was just like her Mom used to make."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-warm-200 rounded-full flex items-center justify-center text-warm-700 font-bold text-sm">RW</div>
+            <div>
+              <p class="font-semibold text-warm-950 text-sm">Robert W.</p>
+              <p class="text-warm-500 text-xs">25-Year Chef</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <span class="inline-block bg-brand-100 text-brand-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 tracking-wide uppercase">Why Choose Us</span>
+        <h2 class="font-display text-4xl lg:text-5xl font-bold text-warm-950 mb-4">
+          More Than Just a <span class="text-brand-500">Restaurant</span>
+        </h2>
+        <p class="text-warm-600 text-lg max-w-2xl mx-auto">
+          We're not fancy — we're family. And that's exactly why people love us.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="wheat" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Fresh Baked Bread</h3>
+          <p class="text-warm-600 text-sm">Complimentary homemade bread with honey butter, baked from scratch daily.</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="salad" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Fresh Salad Bar</h3>
+          <p class="text-warm-600 text-sm">One of the few real salad bars left in Phoenix — included with every dinner.</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="cake-slice" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Homemade Pies</h3>
+          <p class="text-warm-600 text-sm">Made from scratch — apple, banana cream, pumpkin, pecan & more. Huge slices!</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="users" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Family Friendly</h3>
+          <p class="text-warm-600 text-sm">Big comfortable booths, kids' menu, high chairs, and portions for the whole family.</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="truck" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Delivery & Takeout</h3>
+          <p class="text-warm-600 text-sm">No-contact delivery, takeout, and catering available for your convenience.</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="beer" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Full Bar & Cocktails</h3>
+          <p class="text-warm-600 text-sm">Beer, wine, spirits, and great cocktails — plus reasonably priced house wine carafes.</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="party-popper" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Private Dining & Catering</h3>
+          <p class="text-warm-600 text-sm">Private dining room for events, celebrations, and groups. Reservations accepted.</p>
+        </div>
+
+        <div class="feature-card bg-warm-50 rounded-2xl p-8 text-center fade-in hover:bg-warm-100 transition-colors duration-300">
+          <div class="feature-icon w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="accessibility" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h3 class="font-display text-lg font-bold text-warm-950 mb-2">Fully Accessible</h3>
+          <p class="text-warm-600 text-sm">Wheelchair-accessible entrance, seating, restrooms, and free parking lot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Location -->
+  <section id="contact" class="py-20 lg:py-28 bg-warm-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-in">
+        <span class="inline-block bg-brand-500/20 text-brand-400 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 tracking-wide uppercase">Visit Us</span>
+        <h2 class="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
+          Come On <span class="text-brand-400">Over!</span>
+        </h2>
+        <p class="text-warm-400 text-lg max-w-2xl mx-auto">
+          Don't judge the outside — walk in and find great food, big booths, and a warm smile waiting.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div class="fade-in">
+          <div class="rounded-2xl overflow-hidden shadow-2xl h-80 lg:h-full min-h-[400px]">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3326.8!2d-112.098!3d33.494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDI5JzQ4LjAiTiAxMTLCsDA1JzUyLjgiVw!5e0!3m2!1sen!2sus!4v1700000000000"
+              width="100%" 
+              height="100%" 
+              style="border:0; min-height:400px;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="space-y-8 fade-in">
+          <div>
+            <h3 class="font-display text-2xl font-bold text-white mb-6">Restaurant Hours</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center py-3 border-b border-warm-800">
+                <span class="text-warm-300 font-medium">Monday – Thursday</span>
+                <span class="text-brand-400 font-semibold">11:00 AM – 9:00 PM</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-warm-800">
+                <span class="text-warm-300 font-medium">Friday – Saturday</span>
+                <span class="text-brand-400 font-semibold">11:00 AM – 10:00 PM</span>
+              </div>
+              <div class="flex justify-between items-center py-3 border-b border-warm-800">
+                <span class="text-warm-300 font-medium">Sunday</span>
+                <span class="text-brand-400 font-semibold">Closed</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-display text-2xl font-bold text-white mb-6">Contact & Location</h3>
+            <div class="space-y-4">
+              <a href="#" class="flex items-start gap-4 group">
+                <div class="w-10 h-10 bg-brand-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-brand-500/30 transition-colors">
+                  <i data-lucide="map-pin" class="w-5 h-5 text-brand-400"></i>
+                </div>
+                <div>
+                  <p class="text-white font-medium">Indian School Rd & 19th Ave</p>
+                  <p class="text-warm-400 text-sm">Strip mall location — look for the sign!</p>
+                </div>
+              </a>
+              <a href="tel:+16022785280" class="flex items-start gap-4 group">
+                <div class="w-10 h-10 bg-brand-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-brand-500/30 transition-colors">
+                  <i data-lucide="phone" class="w-5 h-5 text-brand-400"></i>
+                </div>
+                <div>
+                  <p class="text-white font-medium group-hover:text-brand-400 transition-colors">(602) 278-5280</p>
+                  <p class="text-warm-400 text-sm">Call for reservations or takeout orders</p>
+                </div>
+              </a>
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-brand-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="car" class="w-5 h-5 text-brand-400"></i>
+                </div>
+                <div>
+                  <p class="text-white font-medium">Free Parking</p>
+                  <p class="text-warm-400 text-sm">Front lot & additional parking behind the building</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-3 mt-6">
+            <span class="bg-warm-800 text-warm-300 px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5">
+              <i data-lucide="accessibility" class="w-3.5 h-3.5"></i> Wheelchair Accessible
+            </span>
+            <span class="bg-warm-800 text-warm-300 px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5">
+              <i data-lucide="credit-card" class="w-3.5 h-3.5"></i> Cards Accepted
+            </span>
+            <span class="bg-warm-800 text-warm-300 px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5">
+              <i data-lucide="baby" class="w-3.5 h-3.5"></i> Kids Menu
+            </span>
+            <span class="bg-warm-800 text-warm-300 px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5">
+              <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i> Reservations
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter / Stay Connected -->
+  <section class="py-16 bg-warm-100">
+    <div class="max-w-3xl mx-auto px-4 text-center fade-in">
+      <h3 class="font-display text-3xl font-bold text-warm-950 mb-3">Stay in the Loop</h3>
+      <p class="text-warm-600 mb-8">Get notified about specials, holiday menus, and events at My Mother's.</p>
+      <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+        <input type="email" id="email-input" placeholder="Enter your email" class="flex-1 px-5 py-3.5 rounded-full border border-warm-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-warm-900 placeholder-warm-400 bg-white">
+        <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-3.5 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/25 flex items-center justify-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          Subscribe
+        </button>
+      </form>
+      <div id="newsletter-success" class="hidden mt-4 bg-green-50 text-green-700 px-4 py-3 rounded-xl text-sm font-medium">
+        🎉 Thanks for subscribing! We'll keep you posted on specials and events.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-warm-950 border-t border-warm-800 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-brand-500 rounded-full flex items-center justify-center">
+              <i data-lucide="utensils" class="w-5 h-5 text-white"></i>
+            </div>
+            <div>
+              <span class="font-display text-xl font-bold text-white">My Mother's</span>
+              <span class="block text-xs text-warm-500 tracking-wider uppercase">Since 1974</span>
+            </div>
+          </div>
+          <p class="text-warm-500 text-sm leading-relaxed">Down-home mainstay serving homestyle American grub — from slow-roasted meats to homemade pies, plus pizza.</p>
+        </div>
+
+        <div>
+          <h4 class="font-display text-lg font-bold text-white mb-4">Quick Links</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#about" class="text-warm-400 hover:text-brand-400 transition-colors text-sm">Our Story</a></li>
+            <li><a href="#menu" class="text-warm-400 hover:text-brand-400 transition-colors text-sm">Menu</a></li>
+            <li><a href="#reviews" class="text-warm-400 hover:text-brand-400 transition-colors text-sm">Reviews</a></li>
+            <li><a href="#contact" class="text-warm-400 hover:text-brand-400 transition-colors text-sm">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display text-lg font-bold text-white mb-4">Service Options</h4>
+          <ul class="space-y-2.5">
+            <li class="text-warm-400 text-sm flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-brand-400"></i> Dine-In</li>
+            <li class="text-warm-400 text-sm flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-brand-400"></i> Takeaway</li>
+            <li class="text-warm-400 text-sm flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-brand-400"></i> Catering</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-display text-lg font-bold text-white mb-4">Get In Touch</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="tel:+16022785280" class="text-warm-400 hover:text-brand-400 transition-colors text-sm flex items-center gap-2">
+                <i data-lucide="phone" class="w-4 h-4"></i> (602) 278-5280
+              </a>
+            </li>
+            <li class="text-warm-400 text-sm flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4"></i> Indian School & 19th Ave, Phoenix
+            </li>
+            <li class="text-warm-400 text-sm flex items-center gap-2">
+              <i data-lucide="clock" class="w-4 h-4"></i> Mon–Sat: 11AM – 10PM
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-warm-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-warm-600 text-sm">&copy; 2025 My Mother's Restaurant. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-warm-500 hover:text-brand-400 transition-colors">
+            <i data-lucide="facebook" class="w-5 h-5"></i>
+          </a>
+          <a href="#" class="text-warm-500 hover:text-brand-400 transition-colors">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="#" class="text-warm-500 hover:text-brand-400 transition-colors">
+            <i data-lucide="yelp" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 bg-brand-500 hover:bg-brand-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none z-50 hover:shadow-xl">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
+  <script>
+    lucide.createIcons();
+
+    // ===== Navbar scroll effect =====
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
+    let lastScroll = 0;
+
+    function updateNavbar() {
+      const scrollY = window.scrollY;
+      
+      if (scrollY > 80) {
+        navbar.classList.add('bg-white', 'shadow-md');
+        navbar.classList.remove('bg-transparent');
+        navbar.querySelectorAll('.nav-link-text, .nav-text-color').forEach(el => {
+          el.classList.remove('text-white');
+          el.classList.add('text-warm-900');
+        });
+        navbar.querySelectorAll('.nav-subtext-color').forEach(el => {
+          el.classList.remove('text-warm-200');
+          el.classList.add('text-warm-600');
+        });
+      } else {
+        navbar.classList.remove('bg-white', 'shadow-md');
+        navbar.classList.add('bg-transparent');
+        navbar.querySelectorAll('.nav-link-text, .nav-text-color').forEach(el => {
+          el.classList.add('text-white');
+          el.classList.remove('text-warm-900');
+        });
+        navbar.querySelectorAll('.nav-subtext-color').forEach(el => {
+          el.classList.add('text-warm-200');
+          el.classList.remove('text-warm-600');
+        });
+      }
+
+      // Back to top button
+      if (scrollY > 500) {
+        backToTop.classList.remove('opacity-0', 'pointer-events-none');
+        backToTop.classList.add('opacity-100', 'pointer-events-auto');
+      } else {
+        backToTop.classList.add('opacity-0', 'pointer-events-none');
+        backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+      }
+
+      lastScroll = scrollY;
+    }
+
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    updateNavbar();
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== Mobile menu toggle =====
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // ===== Scroll animations =====
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ===== Newsletter form =====
+    const newsletterForm = document.getElementById('newsletter-form');
+    const emailInput = document.getElementById('email-input');
+    const successMsg = document.getElementById('newsletter-success');
+
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (email && email.includes('@')) {
+        successMsg.classList.remove('hidden');
+        emailInput.value = '';
+        setTimeout(() => {
+          successMsg.classList.add('hidden');
+        }, 5000);
+      }
+    });
+
+    // ===== Reinitialize Lucide after DOM updates =====
+    setTimeout(() => lucide.createIcons(), 100);
+  </script>
+</body>
+</html>
